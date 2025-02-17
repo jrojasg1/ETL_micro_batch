@@ -1,5 +1,8 @@
 # ETL_micro_batch
 
+## Estructura del Proyecto
+
+```plaintext
 ETL_micro_batch/
 ├── README.md                  # Documentación del proyecto
 ├── airflow/
@@ -27,3 +30,5 @@ ETL_micro_batch/
 ├── docker-compose.yaml              # Configuración de contenedores Docker
 ├── requirements.txt                 # Dependencias del proyecto
 ├── example.env                      # Variables de entorno
+
+```
