@@ -1,4 +1,7 @@
 # ETL_micro_batch
+##  Diagrama de Clases
+A continuación se incluye el diagrama de clases que muestra la estructura y relaciones entre las clases en el proyecto:
+![UML](https://github.com/user-attachments/assets/d14ee4e0-088a-4039-92b1-9a3bc764dfee)
 
 ## Estructura del Proyecto
 
@@ -31,4 +34,25 @@ ETL_micro_batch/
 ├── requirements.txt                 # Dependencias del proyecto
 ├── example.env                      # Variables de entorno
 
+```
+## Configuración
+
+Clona el repositorio:
+```bash
+git clone https://github.com/jrojasg1/ETL_micro_batch.git
+```
+Instala las dependencias:
+```bash
+pip install -r requirements.txt
+```
+configura el entorno copiando example.env a .env y actualiza las variables necesarias.
+
+Levanta los contenedores con Docker:
+
+```bash
+docker-compose up -d
+```
+Después de iniciar los contenedores, ejecuta el pipeline con el siguiente comando:
+```bash
+python main.py
 ```
