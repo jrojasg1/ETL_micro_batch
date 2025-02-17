@@ -1,6 +1,5 @@
 # ETL_micro_batch con Airflow
 
-# ETL_micro_batch
 ##  Diagrama de Clases
 A continuación se incluye el diagrama de clases que muestra la estructura y relaciones entre las clases en el proyecto:
 ![UML](https://github.com/user-attachments/assets/d14ee4e0-088a-4039-92b1-9a3bc764dfee)
