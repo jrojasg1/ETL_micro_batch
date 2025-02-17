@@ -4,7 +4,7 @@ from etl.load.load_base import LoadBase
 from pyspark.sql import functions as F
 
 # Cargar variables de entorno desde el archivo .env
-env_file = "/opt/airflow/etl/.env" 
+env_file = ".env" 
 
 # Verificar si el archivo .env está presente
 if not os.path.exists(env_file):

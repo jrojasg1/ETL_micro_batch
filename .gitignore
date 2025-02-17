@@ -1,0 +1,14 @@
+# Ignorar archivos de compilación de Python
+__pycache__/
+*.py[cod]
+
+# Ignorar archivos de configuración de IDE
+.idea/
+.vscode/
+.env
+venv/
+
+# Ignorar archivos de caché
+*.egg-info/
+dist/
+build/
