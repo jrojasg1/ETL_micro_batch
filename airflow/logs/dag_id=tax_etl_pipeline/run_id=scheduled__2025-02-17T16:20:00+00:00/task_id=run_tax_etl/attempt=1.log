@@ -1,0 +1,235 @@
+[2025-02-17T16:30:01.322+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-02-17T16:30:01.384+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: tax_etl_pipeline.run_tax_etl scheduled__2025-02-17T16:20:00+00:00 [queued]>
+[2025-02-17T16:30:01.408+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: tax_etl_pipeline.run_tax_etl scheduled__2025-02-17T16:20:00+00:00 [queued]>
+[2025-02-17T16:30:01.409+0000] {taskinstance.py:2867} INFO - Starting attempt 1 of 2
+[2025-02-17T16:30:01.435+0000] {taskinstance.py:2890} INFO - Executing <Task(PythonOperator): run_tax_etl> on 2025-02-17 16:20:00+00:00
+[2025-02-17T16:30:01.455+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'tax_etl_pipeline', 'run_tax_etl', 'scheduled__2025-02-17T16:20:00+00:00', '--job-id', '4', '--raw', '--subdir', 'DAGS_FOLDER/tax_etl_dag.py', '--cfg-path', '/tmp/tmp_kfsjznd']
+[2025-02-17T16:30:01.463+0000] {standard_task_runner.py:105} INFO - Job 4: Subtask run_tax_etl
+[2025-02-17T16:30:01.462+0000] {logging_mixin.py:190} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70 DeprecationWarning: This process (pid=206) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-02-17T16:30:01.465+0000] {standard_task_runner.py:72} INFO - Started process 207 to run task
+[2025-02-17T16:30:01.689+0000] {task_command.py:467} INFO - Running <TaskInstance: tax_etl_pipeline.run_tax_etl scheduled__2025-02-17T16:20:00+00:00 [running]> on host 341c015fbe61
+[2025-02-17T16:30:04.118+0000] {taskinstance.py:3134} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='tax_etl_pipeline' AIRFLOW_CTX_TASK_ID='run_tax_etl' AIRFLOW_CTX_EXECUTION_DATE='2025-02-17T16:20:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-02-17T16:20:00+00:00'
+[2025-02-17T16:30:04.349+0000] {taskinstance.py:732} INFO - ::endgroup::
+[2025-02-17T16:30:04.932+0000] {taskinstance.py:3313} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 768, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 734, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 424, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/tax_etl_dag.py", line 48, in run_etl
+    raise Exception(f"Script failed with error: {result.stderr}")
+Exception: Script failed with error: python: can't open file '/opt/***/etl/ETL_micro_batch/main.py': [Errno 2] No such file or directory
+
+[2025-02-17T16:30:05.071+0000] {taskinstance.py:1226} INFO - Marking task as UP_FOR_RETRY. dag_id=tax_etl_pipeline, task_id=run_tax_etl, run_id=scheduled__2025-02-17T16:20:00+00:00, execution_date=20250217T162000, start_date=20250217T163001, end_date=20250217T163005
+[2025-02-17T16:30:05.329+0000] {taskinstance.py:341} INFO - ::group::Post task execution logs
+[2025-02-17T16:30:05.331+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 4 for task run_tax_etl (Script failed with error: python: can't open file '/opt/***/etl/ETL_micro_batch/main.py': [Errno 2] No such file or directory
+; 207)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/cli.py", line 116, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3006, in _run_raw_task
+    return _run_raw_task(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 274, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3161, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3185, in _execute_task
+    return _execute_task(self, context, task_orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 768, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 734, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 424, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/tax_etl_dag.py", line 48, in run_etl
+    raise Exception(f"Script failed with error: {result.stderr}")
+Exception: Script failed with error: python: can't open file '/opt/***/etl/ETL_micro_batch/main.py': [Errno 2] No such file or directory
+
+[2025-02-17T16:30:05.408+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2025-02-17T16:30:05.820+0000] {taskinstance.py:3901} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-02-17T16:30:05.826+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
+[2025-02-17T16:39:15.341+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-02-17T16:39:15.399+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: tax_etl_pipeline.run_tax_etl scheduled__2025-02-17T16:20:00+00:00 [queued]>
+[2025-02-17T16:39:15.425+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: tax_etl_pipeline.run_tax_etl scheduled__2025-02-17T16:20:00+00:00 [queued]>
+[2025-02-17T16:39:15.426+0000] {taskinstance.py:2867} INFO - Starting attempt 1 of 2
+[2025-02-17T16:39:15.481+0000] {taskinstance.py:2890} INFO - Executing <Task(PythonOperator): run_tax_etl> on 2025-02-17 16:20:00+00:00
+[2025-02-17T16:39:15.572+0000] {logging_mixin.py:190} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70 DeprecationWarning: This process (pid=197) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-02-17T16:39:15.579+0000] {standard_task_runner.py:72} INFO - Started process 201 to run task
+[2025-02-17T16:39:15.564+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'tax_etl_pipeline', 'run_tax_etl', 'scheduled__2025-02-17T16:20:00+00:00', '--job-id', '2', '--raw', '--subdir', 'DAGS_FOLDER/tax_etl_dag.py', '--cfg-path', '/tmp/tmpfkei49tf']
+[2025-02-17T16:39:15.600+0000] {standard_task_runner.py:105} INFO - Job 2: Subtask run_tax_etl
+[2025-02-17T16:39:15.849+0000] {task_command.py:467} INFO - Running <TaskInstance: tax_etl_pipeline.run_tax_etl scheduled__2025-02-17T16:20:00+00:00 [running]> on host 5a3b6838f80f
+[2025-02-17T16:39:16.213+0000] {taskinstance.py:3134} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='tax_etl_pipeline' AIRFLOW_CTX_TASK_ID='run_tax_etl' AIRFLOW_CTX_EXECUTION_DATE='2025-02-17T16:20:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-02-17T16:20:00+00:00'
+[2025-02-17T16:39:16.215+0000] {taskinstance.py:732} INFO - ::endgroup::
+[2025-02-17T16:39:16.580+0000] {taskinstance.py:3313} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 768, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 734, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 424, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/tax_etl_dag.py", line 48, in run_etl
+    raise Exception(f"Script failed with error: {result.stderr}")
+Exception: Script failed with error: Traceback (most recent call last):
+  File "/opt/***/etl/main.py", line 1, in <module>
+    from etl.pipelines.tax_pipeline import TaxPipeline
+  File "/opt/***/etl/etl/pipelines/tax_pipeline.py", line 1, in <module>
+    from etl.extract.extract_txt import ExtractTXT
+  File "/opt/***/etl/etl/extract/extract_txt.py", line 1, in <module>
+    from etl.extract.extract_base import ExtractBase
+  File "/opt/***/etl/etl/extract/extract_base.py", line 1, in <module>
+    from pyspark.sql import SparkSession
+ModuleNotFoundError: No module named 'pyspark'
+
+[2025-02-17T16:39:16.631+0000] {taskinstance.py:1226} INFO - Marking task as UP_FOR_RETRY. dag_id=tax_etl_pipeline, task_id=run_tax_etl, run_id=scheduled__2025-02-17T16:20:00+00:00, execution_date=20250217T162000, start_date=20250217T163915, end_date=20250217T163916
+[2025-02-17T16:39:16.766+0000] {taskinstance.py:341} INFO - ::group::Post task execution logs
+[2025-02-17T16:39:16.767+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 2 for task run_tax_etl (Script failed with error: Traceback (most recent call last):
+  File "/opt/***/etl/main.py", line 1, in <module>
+    from etl.pipelines.tax_pipeline import TaxPipeline
+  File "/opt/***/etl/etl/pipelines/tax_pipeline.py", line 1, in <module>
+    from etl.extract.extract_txt import ExtractTXT
+  File "/opt/***/etl/etl/extract/extract_txt.py", line 1, in <module>
+    from etl.extract.extract_base import ExtractBase
+  File "/opt/***/etl/etl/extract/extract_base.py", line 1, in <module>
+    from pyspark.sql import SparkSession
+ModuleNotFoundError: No module named 'pyspark'
+; 201)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/cli.py", line 116, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3006, in _run_raw_task
+    return _run_raw_task(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 274, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3161, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3185, in _execute_task
+    return _execute_task(self, context, task_orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 768, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 734, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 424, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/tax_etl_dag.py", line 48, in run_etl
+    raise Exception(f"Script failed with error: {result.stderr}")
+Exception: Script failed with error: Traceback (most recent call last):
+  File "/opt/***/etl/main.py", line 1, in <module>
+    from etl.pipelines.tax_pipeline import TaxPipeline
+  File "/opt/***/etl/etl/pipelines/tax_pipeline.py", line 1, in <module>
+    from etl.extract.extract_txt import ExtractTXT
+  File "/opt/***/etl/etl/extract/extract_txt.py", line 1, in <module>
+    from etl.extract.extract_base import ExtractBase
+  File "/opt/***/etl/etl/extract/extract_base.py", line 1, in <module>
+    from pyspark.sql import SparkSession
+ModuleNotFoundError: No module named 'pyspark'
+
+[2025-02-17T16:39:16.825+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2025-02-17T16:39:16.915+0000] {taskinstance.py:3901} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-02-17T16:39:16.920+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

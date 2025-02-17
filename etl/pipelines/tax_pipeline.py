@@ -48,7 +48,7 @@ class TaxPipeline:
             self.logger.warning(" No dataset files found in directory.")
             return
 
-        # 🔄 **Procesar cada archivo TXT**
+        # Procesar cada archivo TXT**
         for file_path in dataset_files:
             self.logger.info(f"Processing file: {file_path}")
 
@@ -84,7 +84,8 @@ class TaxPipeline:
         """
         try:
             conn = psycopg2.connect(
-                host=os.getenv("HOST_DB"),
+                host=os.getenv("HOST_DB", "postgres"),  # Usar el nombre del servicio en Docker
+                port=os.getenv("HOST_PORT", "5432"),      # Especificar el puerto
                 database=os.getenv("POSTGRES_DB"),
                 user=os.getenv("POSTGRES_USER"),
                 password=os.getenv("POSTGRES_PASSWORD")

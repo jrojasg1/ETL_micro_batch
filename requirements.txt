@@ -1,0 +1,11 @@
+# Librerías principales
+pyspark==3.4.1
+psycopg2-binary==2.9.9
+python-dotenv==1.0.1
+
+# Dependencias de Airflow (si se usa en el proyecto)
+apache-airflow==2.6.3
+apache-airflow-providers-postgres==5.5.0
+
+# Seguridad y generación de claves
+cryptography==41.0.7
